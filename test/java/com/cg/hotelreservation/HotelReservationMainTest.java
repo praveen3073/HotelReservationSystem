@@ -82,4 +82,37 @@ public class HotelReservationMainTest {
         Assert.assertEquals(9000, hotel.specialWeekdayRate, 0);
         Assert.assertEquals(14000, hotel.specialWeekendRate, 0);
     }
+
+    @Test
+    public void givenDate_WhenInvalid_ShouldThrowException() {
+        try {
+            String startDate = "2020/12/01";
+            hotelReservationMain.validateDate(startDate);
+            Assert.assertTrue(false);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            Assert.assertTrue(true);
+        }
+    }
+
+    @Test
+    public void givenCustomerType_WhenInvalid_ShouldThrowException() {
+        try {
+            String customerType = "VIP";
+            hotelReservationMain.validateCustomerType(customerType);
+            Assert.assertTrue(false);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            Assert.assertTrue(true);
+        }
+    }
+
+    @Test
+    public void givenHotelList_WhenCheapestBestRatedHotelInGivenDateRangeForRewardCustomerFound_ShouldBeTrue() {
+        hotelReservationMain.hotelList.add(new Hotel("ITC", 10000, 15000, "2020-01-25", "2020-01-26", 4, 9000, 14000, "Reward"));
+        hotelReservationMain.hotelList.add(new Hotel("Taj", 6000, 10000, "2020-02-12", "2020-02-14", 3, 5000, 9000, "Reward"));
+        hotelReservationMain.hotelList.add(new Hotel("Mahindra", 6000, 9500, "2020-11-01", "2020-11-04", 4, 5000, 9000, "Reward"));
+        Hotel cheapestBestRatedHotelForRewardCustomers = hotelReservationMain.findCheapestBestRatedHotelByWeekdayRatesForRewardCustomers("2020-01-01", "2020-12-31");
+        Assert.assertEquals("Mahindra", cheapestBestRatedHotelForRewardCustomers.hotelName);
+    }
 }

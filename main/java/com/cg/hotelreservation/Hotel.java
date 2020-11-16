@@ -9,6 +9,7 @@ public class Hotel {
     public int rating;
     public double specialWeekdayRate;
     public double specialWeekendRate;
+    public String customerType = "Regular";
 
     public Hotel(String hotelName, int weekdayRate) {
         this.hotelName = hotelName;
@@ -44,5 +45,17 @@ public class Hotel {
         this.startDate = startDate;
         this.endDate = endDate;
         this.rating = 0;
+    }
+
+    public Hotel(String hotelName, double weekdayRate, double weekendRate, String startDate, String endDate, int rating, double specialWeekdayRate, double specialWeekendRate, String customerType) {
+        this.hotelName = hotelName;
+        this.weekdayRate = weekdayRate;
+        this.weekendRate = weekendRate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.rating = rating;
+        this.specialWeekdayRate = specialWeekdayRate;
+        this.specialWeekendRate = specialWeekendRate;
+        this.customerType = customerType;
     }
 }
