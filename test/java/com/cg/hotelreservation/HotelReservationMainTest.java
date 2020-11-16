@@ -28,4 +28,14 @@ public class HotelReservationMainTest {
         Hotel cheapestHotel = hotelReservationMain.findCheapestHotel("2020-01-01", "2020-12-31");
         Assert.assertEquals("Taj", cheapestHotel.hotelName);
     }
+
+    @Test
+    public void givenWeekendWeekdayRates_WhenHotelCreated_ShouldNotBeNull() {
+        Hotel hotel1 = new Hotel("ITC", 10000, 15000, "2020-01-25", "2020-01-26");
+        Hotel hotel2 = new Hotel("Taj", 6000, 10000, "2020-02-12", "2020-02-14");
+        Hotel hotel3 = new Hotel("Mahindra", 9000, 9500, "2020-11-01", "2020-11-04");
+        Assert.assertNotNull(hotel1);
+        Assert.assertNotNull(hotel2);
+        Assert.assertNotNull(hotel3);
+    }
 }
