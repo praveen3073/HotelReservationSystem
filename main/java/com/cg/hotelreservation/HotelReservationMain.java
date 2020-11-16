@@ -1,22 +1,22 @@
 package com.cg.hotelreservation;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class HotelReservationMain {
     public ArrayList<Hotel> hotelList = new ArrayList<>();
+
     public static void main(String[] args) {
         System.out.println("Welcome to Hotel Reservation System");
     }
 
-    public String findCheapestHotel() {
-        String minRateHotel = hotelList.get(0).hotelName;
-        double minRate = hotelList.get(0).rate;
-        for(Hotel hotel : hotelList) {
-            if(hotel.rate < minRate) {
-                minRate = hotel.rate;
-                minRateHotel = hotel.hotelName;
-            }
-        }
-        return minRateHotel;
+    // Find cheapest hotel in between the given start and end date
+    public Hotel findCheapestHotel(String startDate, String endDate) {
+        Optional<Hotel> cheapestHotel = hotelList.stream()
+                .filter(h -> h.startDate.compareTo(startDate) > 0 && h.endDate.compareTo(endDate) < 0)
+                .reduce((hotel1, hotel2) -> hotel1.rate < hotel2.rate ? hotel1 : hotel2);
+        if (cheapestHotel.isPresent())
+            return cheapestHotel.get();
+        return null;
     }
 }
