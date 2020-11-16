@@ -58,4 +58,16 @@ public class Hotel {
         this.specialWeekendRate = specialWeekendRate;
         this.customerType = customerType;
     }
+
+    public boolean validate() {
+        HotelReservationMain hotelReservationMain = new HotelReservationMain();
+        try {
+            return hotelReservationMain.validateDate(this.startDate) &&
+                   hotelReservationMain.validateDate(this.endDate) &&
+                   hotelReservationMain.validateCustomerType(customerType);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
 }

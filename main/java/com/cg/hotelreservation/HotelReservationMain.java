@@ -60,12 +60,15 @@ public class HotelReservationMain {
     }
 
     // Find cheapest best rated hotel by weekday rates in given date range for Reward customers
+    // Using Java stream, Regex and Exceptions
     public Hotel findCheapestBestRatedHotelByWeekdayRatesForRewardCustomers(String startDate, String endDate) {
         double bestRating = hotelList.stream()
+                .filter(h -> h.validate())
                 .filter(h -> h.startDate.compareTo(startDate) > 0 && h.endDate.compareTo(endDate) < 0)
                 .filter(h -> h.customerType.equalsIgnoreCase("reward"))
                 .reduce((hotel1, hotel2) -> hotel1.rating > hotel2.rating ? hotel1 : hotel2).get().rating;
         Optional<Hotel> cheapestBestRatedHotel = hotelList.stream()
+                .filter(h -> h.validate())
                 .filter(h -> h.startDate.compareTo(startDate) > 0 && h.endDate.compareTo(endDate) < 0)
                 .filter(h -> h.customerType.equalsIgnoreCase("reward"))
                 .filter(h -> h.rating == bestRating)
